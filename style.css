@@ -1,0 +1,100 @@
+body  {
+        font-family: 'Ubuntu', sans-serif;
+        background-image: url("./img.jpg");
+        height: 100%; 
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    
+        
+.login {
+        /*padding-top: 2px*/;
+        padding-bottom: 40px;
+        color: #8C55AA;
+        font-family: 'Ubuntu', georgia;
+        font-weight: bold;
+        font-size: 45px;     
+        
+       }
+    
+.un    {
+        width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 15px;
+        /*border: none;*/
+        border-radius: 10px;
+        /*outline: none;*/
+        letter-spacing: 1px;
+        font-family: 'Ubuntu', georgia;
+        margin-bottom: 40px;
+        margin-left: 56px;
+        text-align: center;
+        margin-bottom: 30px;    
+       }
+    
+form.form1 {
+            padding-top: 40px;
+           }
+    
+.pass {
+       width: 76%;
+       color: rgb(38, 50, 56);
+       font-weight: 700;
+       font-size: 15px;    
+       border-radius: 10px;
+       /*outline: none;*/
+       letter-spacing: 1px;
+       font-family: 'Ubuntu', georgia;
+       margin-bottom: 40px;
+       margin-left: 56px;
+       text-align: center;
+       margin-bottom: 30px;
+      }
+    
+   
+.submit {
+         cursor: pointer;
+         border-radius: 5em;
+         color: #fff;
+         background: linear-gradient(to right, #9C27B0, #E040FB);
+         border: 0;
+         padding-left: 25px;
+         padding-right: 20px;
+         padding-bottom: 10px;
+         padding-top: 10px;
+         font-family: 'Ubuntu', georgia;
+         margin-left: 25%;
+         font-size: 13px;
+         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+         letter-spacing: 1px;
+        }
+    
+.forgot {
+         text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+         color: #blue;
+         padding-top: 30px;
+         padding-right: 30px;
+         font-weight: 700;
+         font-family: 'Ubuntu', georgia;
+        }
+
+.sign {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #blue;
+        padding-top: 30px;
+        padding-right: 30px;
+        font-weight: 700;
+        font-family: 'Ubuntu', georgia;
+      }
+    
+a   {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #E1BEE7;
+        text-decoration: none
+    }
+    
+
+        
+        
