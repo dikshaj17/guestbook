@@ -100,6 +100,7 @@ input{
             <div>
                 
                     <input type="text" name="Name" id="name" placeholder="Enter Name"required/>
+		    <br />
                 
                 
                     <input type="number" name="Phone" id="phone" pattern="[0-9]" placeholder="Enter Phone Number" required />
