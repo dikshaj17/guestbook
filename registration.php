@@ -1,47 +1,46 @@
 <?php
-include_once('connection.php');
-if (isset($_POST['signup_submit'])) {
-$firstname=$_POST['firstname'];
-$lastname=$_POST['lastname'];
-$user=$_POST['username'];
-$email=$_POST['email'];
-$pass=$_POST['password'];
-$sqlQuery ="SELECT * FROM users WHERE username = '".$user."'";
-$sql ="SELECT * FROM users WHERE email = '".$email."'";
-$query = mysqli_query($conn,$sqlQuery);
-$queryy = mysqli_query($conn,$sql);
-$rows = mysqli_num_rows($query);
-$rowss = mysqli_num_rows($queryy);
-$data = mysqli_fetch_array($query,MYSQLI_ASSOC);
-$dataa = mysqli_fetch_array($queryy,MYSQLI_ASSOC);
-if($rows >= 1)
-{
-$mess="Username already taken!";
-echo "<script type='text/javascript'>alert('$mess');</script>";
-}
-elseif($rowss >= 1)
-{
-$messy="E-mail already taken!";
-echo "<script type='text/javascript'>alert('$messy');</script>";
-}
-else{
- $sql = "INSERT INTO users (firstname, lastname, username, email , password)  VALUES ('$firstname','$lastname','$user','$email', '$pass')";
-if ($conn->query($sql) === TRUE) 
-{
-    header("Location: http://localhost/guestbook/index.php");
-
-} 
-else 
-{
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-}
-}
+include_once('process.php');
+// if (isset($_POST['signup_submit'])) {
+// $firstname=$_POST['firstname'];
+// $lastname=$_POST['lastname'];
+// $user=$_POST['username'];
+// $email=$_POST['email'];
+// $pass=$_POST['password'];
+// $sqlQuery ="SELECT * FROM users WHERE username = '".$user."'";
+// $sql ="SELECT * FROM users WHERE email = '".$email."'";
+// $query = mysqli_query($conn,$sqlQuery);
+// $queryy = mysqli_query($conn,$sql);
+// $rows = mysqli_num_rows($query);
+// $rowss = mysqli_num_rows($queryy);
+// $data = mysqli_fetch_array($query,MYSQLI_ASSOC);
+// $dataa = mysqli_fetch_array($queryy,MYSQLI_ASSOC);
+// if($rows >= 1)
+// {
+// $mess="Username already taken!";
+// echo "<script type='text/javascript'>alert('$mess');</script>";
+// }
+// elseif($rowss >= 1)
+// {
+// $messy="E-mail already taken!";
+// echo "<script type='text/javascript'>alert('$messy');</script>";
+// }
+// else{
+//  $sqll = "INSERT INTO users (firstname, lastname, username, email , password)  VALUES ('$firstname','$lastname','$user','$email', '$pass')";
+// if ($conn->query($sqll) === TRUE) 
+// {
+//     header("Location: http://localhost/guestbook/index.php");
+// } 
+// else 
+// {
+//     echo "Error: " . $sqll . "<br>" . $conn->error;
+// }
+// }
 ?>
 
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="script.js"></script>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 *:focus {
@@ -206,6 +205,22 @@ button.social-signin.google {
   background: #DD4B39;
 }
 
+.form_error span {
+  width: 80%;
+  height: 35px;
+  margin: 3px 10%;
+  font-size: 1.1em;
+  color: #D83D5A;
+}
+
+.form_success span {
+  width: 80%;
+  height: 35px;
+  margin: 3px 10%;
+  font-size: 1.1em;
+  color: green;
+}
+
 </style>
 <script type="text/javascript">
 function CheckPassword(inputtxt)  
@@ -224,20 +239,19 @@ return false;
 }
 window.onload = function ()
  {
-    document.getElementById("password").onchange = validatePassword;
+    // document.getElementById("password").onchange = validatePassword;
     document.getElementById("password2").onchange = validatePassword;
  }
 function validatePassword()
-{
-
-var pass2=document.getElementById("password2").value;
-var pass1=document.getElementById("password").value;
-if(pass1!=pass2)
-    document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-else
-    document.getElementById("password2").setCustomValidity("");  
-//empty string means no validation error
-}
+ {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("password2").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
 
 function validateMail()
 {
@@ -287,22 +301,26 @@ function IsEmptyl()
   return true;
 }
 
+
 </script>
 </head>
-<body onload='document.registration.password.focus()'>
-<form name="registration" id="registration" method="post">
+<!-- <body onload='document.registration.password.focus()'> -->
+<body>
+<form name="registration" id="registration" method="post" onsubmit="validatePassword();">
 <div id="login-box">
   <div class="left">
     <h1><b>Sign up</b></h1>
    
-    <input type="text" name="firstname" id="firstname" placeholder="Firstname" required/>
-    <input type="text" name="lastname" id="lastname" onclick="return IsEmptyf();" placeholder="Lastname" required/>
-    <input type="text" name="username" id="username" onclick="return IsEmptyl();" placeholder="Username" required/>
-    <input type="text" name="email" id="email" onclick="return IsEmpty();" placeholder="E-mail" required/>
-    <input type="password" name="password" id="password" placeholder="Password" title="6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter" onclick="return validateMail();" required/>
-    <input type="password" name="password2" id="password2" placeholder="Confirm Password" onclick="CheckPassword(document.registration.password)" />
+    <input type="text" name="firstname" id="firstname" onblur="return IsEmptyf();" placeholder="Firstname" required/>
+    <input type="text" name="lastname" id="lastname" onblur="return IsEmptyl();"  placeholder="Lastname" required/>
+    <input type="text" name="username" id="username" onblur="return IsEmpty();"  placeholder="Username" required/>
+    <span></span>
+    <input type="text" name="email" id="email" onblur="return validateMail();" placeholder="E-mail" required/>
+    <span></span>
+    <input type="password" name="password" id="password" placeholder="Password" title="6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter" onblur="CheckPassword(document.registration.password)" required/>
+    <input type="password" name="password2" id="password2" placeholder="Confirm Password" required/>
    
-   <input type="submit" name="signup_submit" value="Sign me up" onclick="validatePassword();" />
+   <input type="submit" name="signup_submit" id="signup_submit" value="Sign me up"  />
   </div>
  
   <div class="right">

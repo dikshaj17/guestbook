@@ -95,10 +95,10 @@ input{
 </script>
 </head>
 <body>
-	<form name="addform" id="addform" method="post">
+	<form name="addform" id="addform" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
     <div id="contact-panel" class="panel">
         <form id="contact" name="contact" action="#">
-            <h1>Add Contacts</h1>
+            <h1>Edit Contacts</h1>
             <div>
                 
                     <input type="text" name="Name" id="name" placeholder="Enter Name"required/>
@@ -111,7 +111,7 @@ input{
             
             </div>
             <div>
-                <input type="submit" name="submit" class="dash" value="Add" />
+                <input type="submit" name="submit" class="dash" value="Update" />
             </div>
         </form>
     </div>

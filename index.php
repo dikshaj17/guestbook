@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('connection.php');
 if (isset($_POST['submit'])) {
 $user =$_POST['username'];
@@ -7,18 +8,29 @@ $sqlQuery ="SELECT * FROM users WHERE username = '".$user."' AND password = '".$
 $query = mysqli_query($conn,$sqlQuery);
 $rows = mysqli_num_rows($query);
 $data = mysqli_fetch_array($query,MYSQLI_ASSOC);
+$_SESSION['id'] = $data['id'];
+// $_SESSION['username'] = $data['username'];
+// $_SESSION['username'] = $data['firsname'];
+// $_SESSION['username'] = $data['lastname'];
+// $_SESSION['username'] = $data['email'];
 
-if($rows == 1) {
-// if($_POST['remember']=='on'){
+if($rows == 1)
+{
+// $_SESSION['password'] = $pass;
+// if($_POST['remember']=='on')
+// {
+// setcookie("username", $user,time()+(10),"/");
+// setcookie("password", base64_encode($pass),time()+(10),"/");
 // }
 header("location:dashboard.php");
 }
-else{
+
+else
+{
 $mes="Invalid User";
 echo "<script type='text/javascript'>alert('$mes');</script>";
 }
 }
-
 ?>
 
 <html> 
