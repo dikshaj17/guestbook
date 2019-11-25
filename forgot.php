@@ -1,6 +1,11 @@
 <?php
-include_once('connection.php');
 if (isset($_POST['forgot-password'])) {
+session_start();
+include_once('connection.php');
+// if(!$_SESSION['id']){
+// 	header("location:index.php");
+// }
+
 $email =$_POST['email'];
 $sqlQuery ="SELECT password FROM users WHERE email = '".$email."'";
 $query = mysqli_query($conn,$sqlQuery);

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> View Contacts </title>
+        <title> View All Contacts </title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body
@@ -95,7 +95,7 @@ width:50%;
                         // $("#result").html("<img alt="ajax search" src=''/>");
                          $.ajax({
                             type:"post",
-                            url:"search.php",
+                            url:"search2.php",
                             data:"search="+title,
                             success:function(data){
                                 $("#result").html(data);
@@ -105,7 +105,7 @@ width:50%;
                       }else{
                       	$.ajax({
                             type:"post",
-                            url:"search.php",
+                            url:"search2.php",
                             data:"search="+'%',
                             success:function(data){
                                 $("#result").html(data);
@@ -117,10 +117,10 @@ width:50%;
                   });
             });
 
-$(document).on('click', 'button.buttons', function () {
-     $(this).closest('tr').remove();
-     return false;
- });
+// $(document).on('click', 'button.buttons', function () {
+//      $(this).closest('tr').remove();
+//      return false;
+//  });
 
 </script>
 </head>
@@ -132,14 +132,14 @@ $(document).on('click', 'button.buttons', function () {
     
     <table align="center" border="1px" style="width:600px; line-height:40px;" id="result">
         <tr>
-            <th colspan="6"><h2>My Contacts</h2></th>
+            <th colspan="4"><h2>All Contacts</h2></th>
         </tr>
         <tr>
         	<th> ID </th>
             <th> Name </th>
             <th> Phone </th>
             <th> Email </th>
-            <th colspan="2"> Action </th>
+            
         </tr>
 
 
@@ -150,7 +150,7 @@ include_once('connection.php');
 if(!$_SESSION['id']){
   header("location:index.php");
 }
-$sql="select ID, name, phone, email from contact where userid = '".$userid."'";
+$sql="select ID, name, phone, email from contact";
 $Query = MySQLi_query($conn, $sql);
 
 while ($row = MySQLi_fetch_array($Query))
@@ -161,9 +161,6 @@ while ($row = MySQLi_fetch_array($Query))
   	echo "<td>" . $row['name'] . "</td>";
   	echo "<td>" . $row['phone'] . "</td>";
   	echo "<td>" . $row['email'] . "</td>";
-  	echo '<td><a href="edit.php?action=edit&id='.$row['ID'].'" class="buttons">Edit</a></td>';
-  	echo '<td><button type="button" class="buttons" name="delete"> Delete </button> </td>';
-    //echo '<td><button type="button" class="buttons" name="delete"> Delete </button> </td>';
   	echo "</tr>";
   
  }

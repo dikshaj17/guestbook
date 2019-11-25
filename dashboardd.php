@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include_once('connection.php');
@@ -5,7 +6,6 @@ if(!$_SESSION['id']){
   header("location:index.php");
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +15,10 @@ if(!$_SESSION['id']){
 body {
   margin: 0;
   font-family: Georgia;
-  background-image: url("./book3.jpg");
+  background-image: url("./theme.jpg");
+  background-size: cover;
 }
 
-p{
-  font-size:25px;
-}
 .dash{
   font-size: 40px;
   text-align:center;
@@ -28,7 +26,7 @@ p{
 
 .topnav {
   overflow: hidden;
-  background-color: Yellow;
+  background-color: #8B008B;
 }
 
 .topnav a {
@@ -47,8 +45,10 @@ p{
 }
 
 .topnav a.active {
-  background-color: #2196F3;
-  color: white;
+  background-color: yellow;
+  color: Black;
+  text-shadow: 1.3px 1.3px magenta;
+  font-size:22px;
 }
 
 a{
@@ -60,6 +60,10 @@ a{
 	margin-bottom:20px;
 	align-self: right;
 	text-align: right;
+}
+
+p{
+  font-size:25px;
 }
 
 
@@ -85,27 +89,27 @@ a{
 
 .log{
   padding-top: 10px;
-  /*background-color: #8B008B;*/
+  background-color: #8B008B;
   padding-bottom: 10px;
 }
 </style>
 </head>
 <body>
-
+<div class="log">
+</div>
 <div class="topnav">
   <a class="active" href="#home">Home</a>
-  <a href="add.php">Add Contacts</a>
-  <a href="view.php">View Contacts</a>
+  <a href="filter.php">Filter Domain</a>
+  <a href="vieww.php">View Contacts</a>
   <!-- <a href="logout.php">Logout</a> -->
 
 </div>
 
 <div style="padding-left:16px">
-  <h2 class="dash"><b> <I>Welcome To Dashboard!</I></b></h2>
+  <h2 class="dash"><B><I>Hello Admin! Welcome To Dashboard!</I></B> </h2>
   <p align ="center">You have been successfully logged in..</p>
 </div>
 <br><br>
 <a href="logout.php"><input type="submit" class="submit" name="submit" id="btn" value="Logout" /></a>
-
 </body>
 </html>

@@ -1,39 +1,8 @@
 <?php
+session_start();
 include_once('process.php');
-// if (isset($_POST['signup_submit'])) {
-// $firstname=$_POST['firstname'];
-// $lastname=$_POST['lastname'];
-// $user=$_POST['username'];
-// $email=$_POST['email'];
-// $pass=$_POST['password'];
-// $sqlQuery ="SELECT * FROM users WHERE username = '".$user."'";
-// $sql ="SELECT * FROM users WHERE email = '".$email."'";
-// $query = mysqli_query($conn,$sqlQuery);
-// $queryy = mysqli_query($conn,$sql);
-// $rows = mysqli_num_rows($query);
-// $rowss = mysqli_num_rows($queryy);
-// $data = mysqli_fetch_array($query,MYSQLI_ASSOC);
-// $dataa = mysqli_fetch_array($queryy,MYSQLI_ASSOC);
-// if($rows >= 1)
-// {
-// $mess="Username already taken!";
-// echo "<script type='text/javascript'>alert('$mess');</script>";
-// }
-// elseif($rowss >= 1)
-// {
-// $messy="E-mail already taken!";
-// echo "<script type='text/javascript'>alert('$messy');</script>";
-// }
-// else{
-//  $sqll = "INSERT INTO users (firstname, lastname, username, email , password)  VALUES ('$firstname','$lastname','$user','$email', '$pass')";
-// if ($conn->query($sqll) === TRUE) 
-// {
-//     header("Location: http://localhost/guestbook/index.php");
-// } 
-// else 
-// {
-//     echo "Error: " . $sqll . "<br>" . $conn->error;
-// }
+// if(!$_SESSION['id']){
+//   header("location:index.php");
 // }
 ?>
 
@@ -321,6 +290,7 @@ function IsEmptyl()
     <input type="password" name="password2" id="password2" placeholder="Confirm Password" required/>
    
    <input type="submit" name="signup_submit" id="signup_submit" value="Sign me up"  />
+
   </div>
  
   <div class="right">

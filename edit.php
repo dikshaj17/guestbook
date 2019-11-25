@@ -1,6 +1,9 @@
 <?php
 session_start();
 include_once('connection.php');
+if(!$_SESSION['id']){
+  header("location:index.php");
+}
 if (isset($_POST['submit'])) {
 $name=$_POST['Name'];
 $phone=$_POST['Phone'];

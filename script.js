@@ -63,6 +63,7 @@ $('document').ready(function(){
  });
 
  $('#signup_submit').on('click', function(){
+  // e.preventDefault();
  	var firstname = $('#firstname').val();
  	var lastname = $('#lastname').val();
  	var username = $('#username').val();
@@ -75,6 +76,7 @@ $('document').ready(function(){
 	}
   
   else{
+    // alert("djhfvfjdhbhbv");
       // proceed with form submission
       $.ajax({
       	url: 'process.php',
@@ -87,8 +89,11 @@ $('document').ready(function(){
           'email' : email,
       		'password' : password,
       	},
+        dataType: 'text',
       	success: function(response){
-      		alert('user saved');
+          if (response == 'Saved!' ){
+      		alert(response);
+        }
           $('#firstname').val('');
           $('#lastname').val('');
       		$('#username').val('');

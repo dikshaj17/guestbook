@@ -1,6 +1,10 @@
 <?php
 session_start();
+$userid = $_SESSION['id'];
 include_once('connection.php');
+if(!$_SESSION['id']){
+	header("location:index.php");
+}
 if (isset($_POST['submit'])) {
 $name=$_POST['Name'];
 $phone=$_POST['Phone'];
@@ -15,7 +19,7 @@ $num="This name already exists in your contacts!";
 echo "<script type='text/javascript'>alert('$num');</script>";
 }
 else{
-$sql = "INSERT INTO contact (Name, Phone, Email)  VALUES ('$name','$phone', '$email')"; 
+$sql = "INSERT INTO contact (Name, Phone, Email, userid)  VALUES ('$name','$phone', '$email', '".$userid."')"; 
 // $sql = "INSERT INTO contact (Name, Phone, Email, userid)  VALUES ('$name','$phone', '$email','".$_SESSION['id']."')"; 
 if ($conn->query($sql) == TRUE) 
 {

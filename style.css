@@ -1,6 +1,6 @@
 body  {
         font-family: 'Ubuntu', sans-serif;
-        background-image: url("./img.jpg");
+        background-image: url("./admin.jpg");
         height: 100%; 
         background-position: center;
         background-repeat: no-repeat;
@@ -94,7 +94,13 @@ a   {
         color: #E1BEE7;
         text-decoration: none
     }
-    
+
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+     -moz-appearance: checkbox;
+          appearance: checkbox;
+  width: auto;
+}
 
         
         

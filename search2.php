@@ -38,14 +38,14 @@ width:50%;
 <body>
 <table align="center" border="1px" style="width:600px; line-height:40px;" id="result">
         <tr>
-            <th colspan="6"><h2>My Contacts</h2></th>
+            <th colspan="4"><h2>All Contacts</h2></th>
         </tr>
         <tr>
         	<th> ID </th>
             <th> Name </th>
             <th> Phone </th>
             <th> Email </th>
-            <th colspan="2"> Action </th>
+            
         </tr>
 
 
@@ -55,7 +55,7 @@ session_start();
 include_once('connection.php');
 if(isset($_POST['search'])){
 	
-	$sql="Select ID, name, phone, email from contact where (ID like '%".$_POST['search']."%' or name like '%".$_POST['search']."%' or phone like '%".$_POST['search']."%' or email like '%".$_POST['search']."%') And (userid = '".$_SESSION['id']."');";
+	$sql="Select ID, name, phone, email from contact where ID like '%".$_POST['search']."%' or name like '%".$_POST['search']."%' or phone like '%".$_POST['search']."%' or email like '%".$_POST['search']."%'";
 	$result = mysqli_query($conn, $sql);
 
 $found=mysqli_num_rows($result);
@@ -71,8 +71,6 @@ $found=mysqli_num_rows($result);
   	echo "<td>" . $row['name'] . "</td>";
   	echo "<td>" . $row['phone'] . "</td>";
   	echo "<td>" . $row['email'] . "</td>";
-  	echo '<td><input type="button" class="buttons" name="edit" value="Edit"></td>';
-    echo '<td><input type="button" class="buttons" name="delete" value="Delete" ></td>';
   	echo "</tr>";
     } 
     echo"</table>";  

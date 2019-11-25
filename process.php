@@ -1,5 +1,9 @@
 <?php
+// session_start();
 include_once('connection.php');
+// if(!$_SESSION['id']){
+// 	header("location:index.php");
+// }
 if (isset($_POST['username_check'])) {
   	$user = $_POST['username'];
   	$sql = "SELECT * FROM users WHERE username='$user'";
