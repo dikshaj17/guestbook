@@ -197,13 +197,14 @@ function CheckPassword(inputtxt)
 var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 if(inputtxt.value.match(passw))  
 {  
- 
-return true;  
+ $("#passe").text("sahi password hai")
+// return true;  
 }  
 else  
 {  
-alert('try another password...!')  
-return false;  
+  $("#passe").text('try another password...!');
+// alert('try another password...!')  
+// return false;  
 }  
 }
 window.onload = function ()
@@ -217,57 +218,66 @@ function validatePassword()
         var confirmPassword = document.getElementById("password2").value;
         if (password != confirmPassword) {
             alert("Passwords do not match.");
-            return false;
+            // return false;
         }
-        return true;
+        // return true;
     }
 
 function validateMail()
 {
-   
+   console.log("validateemail");
     var x = document.forms["registration"]["email"].value;
     var dotpos = x.lastIndexOf(".");
     var atpos = x.indexOf("@");
     if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
     {
-        alert("Not a valid e-mail address");
-        return false;
+      $("#emailerror").text("Not a valid e-mail address");
+        //alert("Not a valid e-mail address");
+        // return false;
        
+    }else{
+      $("#emailerror").text("");
     }
-  return true;
+  // return true;
 }
 
 function IsEmpty() 
 {
   if (document.forms['registration'].username.value === "" || username.value.length < 5) 
   {
-    alert("Username should be atleast 5 characters");
-    return false;
+    $("#usernamee").text("Username should be atleast 5 characters");
+    // alert("Username should be atleast 5 characters");
+    // return false;
+  }else{
+    $("#usernamee").text("");
   }
 
-  return true;
+  // return true;
 }
 
 function IsEmptyf() 
 {
+  // console.log("shubh");
   if (document.forms['registration'].firstname.value === "" ) 
   {
-    alert("Fill your Firstname");
-    return false;
+    // alert("Fill your Firstname");
+    $("#firstnamee").text("Fill your Firstname");
+    // return false;
   }
 
-  return true;
+  // return true;
 }
 
 function IsEmptyl() 
 {
   if (document.forms['registration'].lastname.value === "" ) 
   {
-    alert("Fill your lastname");
-    return false;
+    $("#lastnamee").text("Fill your lastname");
+    // alert("Fill your lastname");
+    // return false;
   }
 
-  return true;
+  // return true;
 }
 
 
@@ -280,13 +290,16 @@ function IsEmptyl()
   <div class="left">
     <h1><b>Sign up</b></h1>
    
-    <input type="text" name="firstname" id="firstname" onblur="return IsEmptyf();" placeholder="Firstname" required/>
-    <input type="text" name="lastname" id="lastname" onblur="return IsEmptyl();"  placeholder="Lastname" required/>
-    <input type="text" name="username" id="username" onblur="return IsEmpty();"  placeholder="Username" required/>
-    <span></span>
-    <input type="text" name="email" id="email" onblur="return validateMail();" placeholder="E-mail" required/>
-    <span></span>
+    <input type="text" name="firstname" id="firstname" placeholder="Firstname" required/>
+    <span id="firstnamee"></span>
+    <input type="text" name="lastname" id="lastname" placeholder="Lastname" required/>
+    <span id="lastnamee"></span>
+    <input type="text" name="username" id="username" onkeyup="IsEmpty();" placeholder="Username" required/>
+    <span id="usernamee"></span>
+    <input type="text" name="email" id="email" onkeyup ="validateMail();" placeholder="E-mail" required/>
+    <span id="emailerror"></span>
     <input type="password" name="password" id="password" placeholder="Password" title="6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter" onblur="CheckPassword(document.registration.password)" required/>
+    <span id="passe"></span>
     <input type="password" name="password2" id="password2" placeholder="Confirm Password" required/>
    
    <input type="submit" name="signup_submit" id="signup_submit" value="Sign me up"  />

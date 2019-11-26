@@ -7,9 +7,11 @@ $('document').ready(function(){
   var username = $('#username').val();
   // console.log(username);
   if (username == '') {
+    $('#usernamee').text('Username should not be empty');
   	username_state = false;
   	return;
   }
+
   $.ajax({
     url: 'process.php',
     type: 'post',
@@ -19,47 +21,47 @@ $('document').ready(function(){
     },
     success: function(response){
       if (response == 'taken' ) {
-        // console.log(response);
-      	username_state = false;
-      	$('#username').parent().removeClass();
-      	$('#username').parent().addClass("form_error");
-      	$('#username').siblings("span").text('Sorry... Username already taken');
-      }else if (response == 'not_taken') {
+        username_state = false;
+      	$('#usernamee').text('Sorry... Username already taken');
+      }
+      else if (response == 'not_taken') {
       	username_state = true;
-      	$('#username').parent().removeClass();
-      	$('#username').parent().addClass("form_success");
-      	$('#username').siblings("span").text('Username available');
+      	$('#usernamee').text('Username available');
       }
     }
   });
  });		
   $('#email').on('blur', function(){
  	var email = $('#email').val();
- 	if (email == '') {
- 		email_state = false;
- 		return;
+  var dotpos = email.lastIndexOf(".");
+  var atpos = email.indexOf("@");
+ 	if (email == '' || (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)) {
+  $('#emailerror').text('Not Valid');
+ 	email_state = false;
+ 	return;
  	}
- 	$.ajax({
+
+  $.ajax({
       url: 'process.php',
       type: 'post',
       data: {
-      	'email_check' : 1,
-      	'email' : email,
+        'email_check' : 1,
+        'email' : email,
       },
       success: function(response){
-      	if (response == 'taken' ) {
+        if (response == 'taken' ) {
           email_state = false;
-          // $('#email').parent().removeClass();
-          // $('#email').parent().addClass("form_error");
-          $('#email').siblings("span").text('Sorry... Email already taken');
-      	}else if (response == 'not_taken') {
-      	  email_state = true;
-      	  // $('#email').parent().removeClass();
-      	  // $('#email').parent().addClass("form_success");
-      	  $('#email').siblings("span").text('Email available');
-      	}
+          $('#emailerror').text('Sorry... Email already taken');
+        }
+        else if (response == 'not_taken') {
+          email_state = true;
+          $('#emailerror').text('Email available');
+          
+        }
       }
- 	});
+  });
+  // }
+ 	
  });
 
  $('#signup_submit').on('click', function(){
