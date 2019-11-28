@@ -30,7 +30,7 @@ body {
   position: relative;
   margin: 5% auto;
   width: 600px;
-  height: 400px;
+  height: 500px;
   background: #FFF;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -197,7 +197,7 @@ function CheckPassword(inputtxt)
 var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 if(inputtxt.value.match(passw))  
 {  
- $("#passe").text("sahi password hai")
+ $("#passe").text("Password Pattern Success!");
 // return true;  
 }  
 else  
@@ -225,18 +225,18 @@ function validatePassword()
 
 function validateMail()
 {
-   console.log("validateemail");
+   // console.log("validateemail");
     var x = document.forms["registration"]["email"].value;
     var dotpos = x.lastIndexOf(".");
     var atpos = x.indexOf("@");
     if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
     {
-      $("#emailerror").text("Not a valid e-mail address");
-        //alert("Not a valid e-mail address");
-        // return false;
-       
-    }else{
-      $("#emailerror").text("");
+      $("#emailerror").text("Not a valid e-mail address");  
+    }
+
+    else
+    {
+      $("#emailerror").text("Valid Email");
     }
   // return true;
 }

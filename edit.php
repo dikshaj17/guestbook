@@ -1,36 +1,53 @@
 <?php
 session_start();
 include_once('connection.php');
-if(!$_SESSION['id']){
+if(!$_SESSION['id'])
+{
   header("location:index.php");
 }
-if (isset($_POST['submit'])) {
+
+if (isset($_POST['submit']))
+{
 $name=$_POST['Name'];
 $phone=$_POST['Phone'];
 $email=$_POST['Email'];
 $sqlQuery ="SELECT * FROM contact WHERE Name = '".$name."'";
 $query = mysqli_query($conn,$sqlQuery);
 $rows = mysqli_num_rows($query);
-$data = mysqli_fetch_array($query,MYSQLI_ASSOC);
-if($rows >= 1)
+$data = mysqli_fetch_row($query);
+if($rows >= 1 && $data[0] != $_SESSION['editid'])
 {
 $num="This name already exists in your contacts!";
 echo "<script type='text/javascript'>alert('$num');</script>";
 }
-else{
-$sql = "INSERT INTO contact (Name, Phone, Email)  VALUES ('$name','$phone', '$email')"; 
-// $sql = "INSERT INTO contact (Name, Phone, Email, userid)  VALUES ('$name','$phone', '$email','".$_SESSION['id']."')"; 
-if ($conn->query($sql) == TRUE) 
+else
 {
-    $pos="Successfully Added!";
+$sql = "UPDATE contact SET name='$name', phone='$phone', email='$email' where id='".$_SESSION['editid']."';"; 
+if($conn->query($sql) == TRUE){
+  $pos="Successfully Updated!";
 echo "<script type='text/javascript'>alert('$pos');</script>";
+}
+}
+// elseif ($conn->query($sql) == TRUE) 
+// {
+// $pos="Successfully Updated!";
+// echo "<script type='text/javascript'>alert('$pos');</script>";
+// } 
+// else 
+// {
+//     echo "Error: " . $sql . "<br>" . $conn->error;
+// }
+}
 
-} 
-else 
+else if(isset($_GET['id']))
 {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-}
+  $_SESSION['editid'] = $_GET['id'];
+  $sqlQuery ="SELECT * FROM contact WHERE id = '".$_GET['id']."';";
+  $query = mysqli_query($conn,$sqlQuery);
+  $data = mysqli_fetch_row($query);
+  $n = $data[1];
+  $p = $data[2];
+  $e = $data[3];
 }
 ?>
 
@@ -104,13 +121,13 @@ input{
             <h1>Edit Contacts</h1>
             <div>
                 
-                    <input type="text" name="Name" id="name" placeholder="Enter Name"required/>
+                    <input type="text" name="Name" id="name" value = "<?php echo (isset($n) ? htmlspecialchars($n) : ''); ?>" placeholder="Enter Name"required/>
                 
                 
-                    <input type="number" name="Phone" id="phone" pattern="[0-9]" placeholder="Enter Phone Number" required />
+                    <input type="number" name="Phone" id="phone" value = "<?php echo (isset($p) ? htmlspecialchars($p) : ''); ?>" pattern="[0-9]" placeholder="Enter Phone Number" required />
            
                 
-                    <input type="email" name="Email" id="email"  placeholder="Enter E-Mail" required />
+                    <input type="email" name="Email" id="email" value = "<?php echo (isset($e) ? htmlspecialchars($e) : ''); ?>"  placeholder="Enter E-Mail" required />
             
             </div>
             <div>

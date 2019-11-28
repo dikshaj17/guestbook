@@ -31,12 +31,11 @@ $('document').ready(function(){
     }
   });
  });		
+
   $('#email').on('blur', function(){
  	var email = $('#email').val();
-  var dotpos = email.lastIndexOf(".");
-  var atpos = email.indexOf("@");
- 	if (email == '' || (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)) {
-  $('#emailerror').text('Not Valid');
+ 	if (email == '' ){
+  $('#emailerror').text('Email should not be empty');
  	email_state = false;
  	return;
  	}
@@ -56,13 +55,11 @@ $('document').ready(function(){
         else if (response == 'not_taken') {
           email_state = true;
           $('#emailerror').text('Email available');
-          
-        }
+         }
       }
   });
-  // }
- 	
- });
+});
+
 
  $('#signup_submit').on('click', function(){
   // e.preventDefault();
@@ -75,11 +72,9 @@ $('document').ready(function(){
  	if (username_state == false || email_state == false ) {
 	  // $('#login-box').text('Fix the errors in the form first');
     alert('user denied');
+    return;
 	}
-  
-  else{
-    // alert("djhfvfjdhbhbv");
-      // proceed with form submission
+
       $.ajax({
       	url: 'process.php',
       	type: 'post',
@@ -94,7 +89,7 @@ $('document').ready(function(){
         dataType: 'text',
       	success: function(response){
           if (response == 'Saved!' ){
-      		alert(response);
+      		alert('Saved!');
         }
           $('#firstname').val('');
           $('#lastname').val('');
@@ -103,6 +98,5 @@ $('document').ready(function(){
       		$('#password').val('');
       	}
       });
- 	}
- });
+  });
 });

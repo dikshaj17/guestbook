@@ -10,7 +10,8 @@ if (isset($_POST['username_check'])) {
   	$results = mysqli_query($conn, $sql);
   	if (mysqli_num_rows($results) > 0) {
   	  echo "taken";	
-  	}else{
+  	}
+  	else{
   	  echo 'not_taken';
   	}
   	exit();
@@ -22,7 +23,8 @@ if (isset($_POST['email_check'])) {
   	$results = mysqli_query($conn, $sql);
   	if (mysqli_num_rows($results) > 0) {
   	  echo "taken";	
-  	}else{
+  	}
+  	else{
   	  echo 'not_taken';
   	}
   	exit();
